@@ -16,11 +16,13 @@ export class App extends Component {
 
   searchPic = newPic => {
     const query = `${nanoid()}/${newPic}`;
-    this.setState({
-      search: query.slice(query.indexOf('/') + 1, query.length),
-      picture: [],
-      page: 1,
-    });
+    if (newPic !== this.state.search) {
+      this.setState({
+        search: query.slice(query.indexOf('/') + 1, query.length),
+        picture: [],
+        page: 1,
+      });
+    }
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -33,10 +35,8 @@ export class App extends Component {
         this.state.search,
         this.state.page
       );
-      this.setState(prevState => {
-        return {
-          picture: getPicture,
-        };
+      this.setState({
+        picture: getPicture,
       });
       this.setState({ isLoading: false });
     }
