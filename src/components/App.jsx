@@ -16,13 +16,10 @@ export class App extends Component {
 
   searchPic = newPic => {
     const query = `${nanoid()}/${newPic}`;
-    if (newPic !== this.state.search) {
-      this.setState({
-        search: query.slice(query.indexOf('/') + 1, query.length),
-        picture: [],
-        page: 1,
-      });
-    }
+    this.setState({
+      search: query.slice(query.indexOf('/') + 1, query.length),
+      page: 1,
+    });
   };
 
   async componentDidUpdate(prevProps, prevState) {
