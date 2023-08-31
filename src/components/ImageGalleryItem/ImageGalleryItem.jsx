@@ -1,5 +1,6 @@
 import ReactModal from 'react-modal';
 import { Component } from 'react';
+import { Modal } from 'components/Modal/Modal';
 
 const customStyles = {
   content: {
@@ -15,18 +16,33 @@ const customStyles = {
 ReactModal.setAppElement('#root');
 
 export class ImgItem extends Component {
+  state = {
+    isOpen: false,
+  };
+
+  openModal = () => {
+    this.setState({ isOpen: true });
+  };
+
+  closeModal = () => {
+    this.setState({ isOpen: false });
+  };
+
   render() {
-    const { picture, stateModal, isClose } = this.props;
+    const { picture } = this.props;
     return (
       <>
-        <img src={picture.webformatURL} alt={picture.tags} />
-        <ReactModal
-          isOpen={stateModal}
-          onRequestClose={isClose}
+        <img
+          src={picture.webformatURL}
+          alt={picture.tags}
+          onClick={this.openModal}
+        />
+        <Modal
+          picture={picture}
+          isOpen={this.state.isOpen}
+          closeModal={this.closeModal}
           style={customStyles}
-        >
-          <img src={picture.largeImageURL} alt={picture.id} />
-        </ReactModal>
+        />
       </>
     );
   }

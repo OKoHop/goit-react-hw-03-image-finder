@@ -10,7 +10,7 @@ export const SearchBar = ({ submitForm }) => {
           }
           evt.preventDefault();
           submitForm(evt.target.elements.search.value);
-          evt.target.reset();
+          // evt.target.reset();
         }}
       >
         <input type="text" name="search" />
